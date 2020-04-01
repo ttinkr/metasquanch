@@ -1,0 +1,44 @@
+{
+  "name": "metasquanch",
+  "version": "1.0.0",
+  "description": "Comfortable removal of metadata from documents",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js",
+    "dev": "nodemon server.js",
+    "debug": "nodemon --inspect server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/ttinkr/metasquanch.git"
+  },
+  "keywords": [
+    "metadata",
+    "exiftool"
+  ],
+  "author": "ttinkr",
+  "license": "GPL-3.0-only",
+  "dependencies": {
+    "adm-zip": "^0.4.14",
+    "body-parser": "^1.19.0",
+    "connect-redis": "^4.0.4",
+    "dotenv": "^8.2.0",
+    "expect-ct": "^0.3.0",
+    "express": "^4.17.1",
+    "express-favicon": "^2.0.1",
+    "express-fileupload": "^1.1.6",
+    "express-handlebars": "^3.1.0",
+    "express-pino-logger": "^4.0.0",
+    "express-session": "^1.17.0",
+    "fs-extra": "^9.0.0",
+    "helmet": "^3.21.3",
+    "https": "^1.0.0",
+    "imapflow": "^1.0.37",
+    "multer": "^1.4.2",
+    "nodemailer": "^6.4.6",
+    "pino": "^5.17.0",
+    "redis": "^3.0.2",
+    "sanitize-filename": "^1.6.3",
+    "uuid": "^7.0.2"
+  }
+}

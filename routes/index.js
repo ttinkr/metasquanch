@@ -1,0 +1,15 @@
+const
+  router = require('express').Router(),
+  process = require('process'),
+  homeController = require('../controllers/homeController'),
+  uploadService = require('../services/uploadService'),
+  cleanController = require('../controllers/cleanController'),
+  downloadController = require('../controllers/downloadController'),
+  logsController = require('../controllers/logsController');
+
+router.get('/', homeController.renderHome);
+router.post('/clean', uploadService.upload.any('files', process.env.MAX_FILES), cleanController.cleanFiles);
+router.get('/download', downloadController.downloadFiles);
+router.get('/logs', logsController.getLogs);
+
+module.exports = router;

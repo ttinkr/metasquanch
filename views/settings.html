@@ -1,0 +1,39 @@
+{{> head }}
+    <body>
+        {{> navigation }}
+        <main>
+            <h1>{{ heading }}</h1>
+        </main>
+        <div class="content-panel">
+            <form method="POST" action="/settings">
+                <fieldset>
+                    <br>
+                    <p>
+                        <label class="form-label" for="upload-path">Upload path</label>
+                        <input type="text" class="text-input" id="upload-path" name="uploadPath" value={{ uploadPath }}>
+                    </p>
+                    <p>
+                        <label class="form-label" for="download-path">Download path</label>
+                        <input type="text" class="text-input" id="download-path" name="downloadPath" value={{ downloadPath }}>
+                    </p>
+                    <p>
+                        <label class="form-label" for="alter-file-names">Alter file names</label>
+                        <input type="checkbox" class="checkbox" id="alter-file-names" name="alterFileNames" value={{ alterFileNames }}>
+                    </p>
+                    <p>
+                        <label class="form-label" for="max-file-uploads">Maximum file uploads</label>
+                        <input type="text" class="text-input" id="max-file-uploads" name="maxFileUploads" value={{ maxFileUploads }}>
+                    </p>
+                    <p>
+                        <label class="form-label" for="max-file-size">Maximum file size (MB)</label>
+                        <input type="text" class="text-input" id="max-file-size" name="maxFileSize" value={{ maxFileSize }}>
+                    </p>
+                    <p>
+                        <input type="hidden" class="text-input" id="port" name="port" value={{ port }}>
+                    </p>
+                    <input type="submit" class="submit-button" id="submit-button" value="Save">
+                </fieldset>
+            </form>
+        </div>
+    </body>
+</html>

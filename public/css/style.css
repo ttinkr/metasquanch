@@ -1,0 +1,113 @@
+body {
+    background: rgb(243, 244, 245);
+    height: 100%;
+    color: rgb(100, 108, 127);
+    line-height: 1.4rem;
+    font-family: Roboto, "Open Sans", sans-serif;
+    font-size: 16px;
+    font-weight: 300;
+    text-rendering: optimizeLegibility;
+}
+
+h1 {
+    text-align: center;
+}
+
+h4 {
+    text-align: center;
+}
+
+nav {
+    padding-bottom: 1em;
+}
+
+.submit-button {
+    float: left;
+    margin-left: 23em;
+}
+
+.navigation li {
+    float: left;
+    margin-right: 2em;
+    list-style: none;
+}
+
+.nav-link {
+    padding: 5px 10px;
+    font-size: 16px;
+    font-weight: bold;
+    color: #fff;
+    text-decoration: none;
+    background-color: #4488ff;
+    border-radius: 3px;
+}
+
+.nav-link.active,
+.nav-link.active:hover {
+    background-color: #ffaa44;
+}
+
+.nav-link:hover {
+    background-color: #5599ff;
+}
+
+.dropzone {
+    background: white;
+    border-radius: 5px;
+    border: 2px dashed rgb(0, 135, 247);
+    border-image: none;
+    max-width: 500px;
+    min-height: 200px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.squanchy {
+    text-align: center;
+    display: block;
+}
+
+.form-label {
+    display: inline-block;
+    width: 13em;
+}
+
+.buttons {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+}
+
+.download-button {
+    display: block;
+    margin-left: 1em;
+    text-align: center;
+    visibility: hidden;
+}
+
+.show-button {
+    display: block;
+    margin-left: 1em;
+    text-align: center;
+    visibility: hidden;
+}
+
+.log-content {
+    display: inline-block;
+    font-family: "Lucida Console", Monaco, monospace;
+    font-size: 0.8rem;
+    line-height: 1.2;
+}
+
+.log-section {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.text-input {
+    height: 20px;
+    width: 10em;
+    line-height: 28px;
+    font-size: 16px;
+}
