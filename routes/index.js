@@ -1,6 +1,5 @@
 const
   router = require('express').Router(),
-  process = require('process'),
   homeController = require('../controllers/homeController'),
   uploadService = require('../services/uploadService'),
   cleanController = require('../controllers/cleanController'),

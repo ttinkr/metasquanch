@@ -50,6 +50,7 @@ server.set("view engine", "html");
 
 // static hosting of public folder
 server.use(express.static("public"));
+server.use(favicon(__dirname + '/public/images/squanchy.png'));
 
 // set secure headers
 server.use((req, res, next) => {

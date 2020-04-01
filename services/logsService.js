@@ -1,7 +1,6 @@
 const
     fs = require('fs-extra'),
-    path = require('path'),
-    process = require('process');
+    path = require('path');
 
 const enableLogs = async sessionId => {
     const logFile = path.join(__dirname, '../', process.env.LOG_PATH, sessionId, sessionId + '.log');
