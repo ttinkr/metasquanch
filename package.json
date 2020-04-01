@@ -6,7 +6,8 @@
   "scripts": {
     "start": "node server.js",
     "dev": "nodemon server.js",
-    "debug": "nodemon --inspect server.js"
+    "debug": "nodemon --inspect server.js",
+    "preinstall": "npx npm-force-resolutions"
   },
   "repository": {
     "type": "git",
@@ -33,12 +34,18 @@
     "fs-extra": "^9.0.0",
     "helmet": "^3.21.3",
     "https": "^1.0.0",
-    "imapflow": "^1.0.37",
+    "imapflow": "^1.0.38",
     "multer": "^1.4.2",
     "nodemailer": "^6.4.6",
     "pino": "^5.17.0",
     "redis": "^3.0.2",
     "sanitize-filename": "^1.6.3",
     "uuid": "^7.0.2"
+  },
+  "resolutions": {
+    "minimist": "^1.2.5"
+  },
+  "devDependencies": {
+    "minimist": "^1.2.5"
   }
 }
