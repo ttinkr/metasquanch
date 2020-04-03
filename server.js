@@ -104,9 +104,9 @@ let sessionOptions = {
   }
 };
 
-if (process.env.NODE_ENV === "production") {
+if (process.env.REDIS_URL) {
   let RedisStore = require("connect-redis")(session);
-  let redisClient = redis.createClient();
+  let redisClient = redis.createClient(process.env.REDIS_URL);
   sessionOptions.store = new RedisStore({
     client: redisClient,
     url: process.env.REDIS_URL
@@ -137,6 +137,5 @@ if (process.env.TLS_ENABLED === true) {
 } else {
   server.listen(process.env.PORT || process.argv[2] || 8000, () => {
     console.log("HTTP Server running on port " + (process.env.PORT || process.argv[2] || 8000));
-    console.log("If this is a production system you should consider enabling TLS");
   });
 }
