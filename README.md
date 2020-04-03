@@ -17,13 +17,13 @@ metasquanch is a server application that allows ingestion of files via web uploa
 If you plan to run metasquanch without a container runtime, be sure to install exiftool and qpdf. This can be achieved by running...
 
 ```
-apt update && apt install exiftool qpdf
+sudo apt update && apt install exiftool qpdf
 ```
 
 ...on a Debian based OS or by running...
 
 ```
-dnf install qpdf exiftool
+sudo dnf install qpdf exiftool
 ```
 
 ...on a RedHat based OS.
