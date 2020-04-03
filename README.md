@@ -1,5 +1,4 @@
-<img src="./public/images/squanchy.png" align="right"
-     alt="metasquanch" width="12%">
+<img src="./public/images/squanchy.png" align="right" alt="metasquanch" width="12%">
 
 # metasquanch
 
@@ -10,8 +9,7 @@ metasquanch is a server application that allows ingestion of files via web uploa
 - Usage of of exiftool and qpdf in the background (more to come...)
 - Ready to deploy as Node.js application, standalone docker container or using docker-compose
 
-![example](./public/images/example.png | width=50)
-  
+ <img src="./public/images/example.png " alt="example" align="left" height="70" />
   
 ## Running metasquanch as Node.js application
 
