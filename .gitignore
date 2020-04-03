@@ -4,3 +4,4 @@ log
 node_modules
 upload
 .env
+npm-debug.log

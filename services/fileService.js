@@ -1,7 +1,6 @@
 const
     fs = require("fs-extra"),
-    path = require("path"),
-    process = require("process");
+    path = require("path");
 
 const copyToDownload = async sessionId => {
     let absolutePathUpload = path.join(__dirname, "../", process.env.UPLOAD_PATH, sessionId);
