@@ -48,7 +48,6 @@ server.engine(
 );
 server.set("view engine", "html");
 
-// static hosting of public folder
 server.use(express.static("public"));
 server.use(favicon(__dirname + '/public/images/squanchy.png'));
 
