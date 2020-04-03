@@ -1,7 +1,7 @@
 # metasquanch
 
 <img src="./public/images/squanchy.png" align="right"
-     alt="metasquanch" width="50%">
+     alt="metasquanch" width="20%">
 
 metasquanch is a server application that allows ingestion of files via web upload or email to remove metadata, javascript and other unwanted parts.
 
