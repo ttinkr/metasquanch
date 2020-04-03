@@ -9,7 +9,7 @@ metasquanch is a server application that allows ingestion of files via web uploa
 - Usage of of exiftool and qpdf in the background (more to come...)
 - Ready to deploy as Node.js application, standalone docker container or using docker-compose
 
- <img src="./public/images/example.png " alt="example" align="left" height="300" />
+ <img src="./public/images/example.png " alt="example" align="left" height="500" />
   
 ## Running metasquanch as Node.js application
 
