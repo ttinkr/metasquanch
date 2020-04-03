@@ -30,7 +30,7 @@ fs.emptyDir(path.join(process.env.UPLOAD_PATH));
 fs.emptyDir(path.join(process.env.DOWNLOAD_PATH));
 fs.emptyDir(path.join(process.env.LOG_PATH));
 
-if (process.env.MAIL_ENABLED) {
+if (process.env.MAIL_ENABLED === true) {
   mailService.openMailbox();
 }
 
@@ -118,7 +118,7 @@ server.use(session(sessionOptions));
 server.use("/", router);
 
 // tls
-if (process.env.TLS_ENABLED) {
+if (process.env.TLS_ENABLED === true) {
   const privateKey = fs.readFileSync(process.env.PRIVATE_KEY, "utf8"),
     certificate = fs.readFileSync(process.env.CERT, "utf8");
   ca = fs.readFileSync(process.env.CA, "utf8");
@@ -136,6 +136,7 @@ if (process.env.TLS_ENABLED) {
   });
 } else {
   server.listen(process.env.PORT || process.argv[2] || 8000, () => {
-    console.log("HTTPS Server running on port " + (process.env.PORT || process.argv[2] || 8000));
+    console.log("HTTP Server running on port " + (process.env.PORT || process.argv[2] || 8000));
+    console.log("If this is a production system you should consider enabling TLS");
   });
 }
