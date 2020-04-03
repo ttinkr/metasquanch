@@ -30,7 +30,9 @@ fs.emptyDir(path.join(process.env.UPLOAD_PATH));
 fs.emptyDir(path.join(process.env.DOWNLOAD_PATH));
 fs.emptyDir(path.join(process.env.LOG_PATH));
 
-mailService.openMailbox();
+if (process.env.MAIL_ENABLED) {
+  mailService.openMailbox();
+}
 
 server.use(
   bodyParser.urlencoded({
@@ -102,7 +104,7 @@ let sessionOptions = {
   }
 };
 
-if (server.get("env") === "production") {
+if (process.env.NODE_ENV === "production") {
   let RedisStore = require("connect-redis")(session);
   let redisClient = redis.createClient();
   sessionOptions.store = new RedisStore({
@@ -116,18 +118,24 @@ server.use(session(sessionOptions));
 server.use("/", router);
 
 // tls
-const privateKey = fs.readFileSync(process.env.PRIVATE_KEY, "utf8"),
-  certificate = fs.readFileSync(process.env.CERT, "utf8");
-ca = fs.readFileSync(process.env.CA, "utf8");
-(options = {
-  key: privateKey,
-  cert: certificate,
-  ca: ca,
-  secureOptions: constants.SSL_OP_NO_SSLv2 | constants.SSL_OP_NO_SSLv3 | constants.SSL_OP_NO_TLSv1 | constants.SSL_OP_NO_TLSv1_1,
-  honorCipherOrder: true
-}),
-(httpsServer = https.createServer(options, server));
+if (process.env.TLS_ENABLED) {
+  const privateKey = fs.readFileSync(process.env.PRIVATE_KEY, "utf8"),
+    certificate = fs.readFileSync(process.env.CERT, "utf8");
+  ca = fs.readFileSync(process.env.CA, "utf8");
+  (options = {
+    key: privateKey,
+    cert: certificate,
+    ca: ca,
+    secureOptions: constants.SSL_OP_NO_SSLv2 | constants.SSL_OP_NO_SSLv3 | constants.SSL_OP_NO_TLSv1 | constants.SSL_OP_NO_TLSv1_1,
+    honorCipherOrder: true
+  }),
+  (httpsServer = https.createServer(options, server));
 
-httpsServer.listen(process.env.PORT || process.argv[2] || 8000, () => {
-  console.log("HTTPS Server running on port " + (process.env.PORT || process.argv[2] || 8000));
-});
+  httpsServer.listen(process.env.PORT || process.argv[2] || 8000, () => {
+    console.log("HTTPS Server running on port " + (process.env.PORT || process.argv[2] || 8000));
+  });
+} else {
+  server.listen(process.env.PORT || process.argv[2] || 8000, () => {
+    console.log("HTTPS Server running on port " + (process.env.PORT || process.argv[2] || 8000));
+  });
+}
