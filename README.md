@@ -38,7 +38,7 @@ cp .env-sample .env
 vim .env
 npm start
 ```
-## Running metasquanch as a docker container
+## Running metasquanch using docker
 
 ### Prerequisites
 If you plan to run metasquanch as a container you need a working container engine like docker.
@@ -54,6 +54,8 @@ docker build -t ttinkr/metasquanch .
 docker run metasquanch
 ```
 I am planning on uploading the image to Docker Hub soon.
+
+## Running metasquanch using docker-compose
 
 ### Prerequisites
 If you plan to run metasquanch as a container using docker-compose you need a working docker container engine and docker-compose installed.
