@@ -4,5 +4,5 @@ RUN apt install -y --no-install-recommends exiftool qpdf
 COPY package*.json ./
 RUN npm install
 COPY . .
-EXPOSE 8080
-CMD [ "npm", "start" ]
+EXPOSE 443
+CMD [ "npm", "start" "443"]
