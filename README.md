@@ -8,7 +8,7 @@ metasquanch is a server application that allows ingestion of files via web uploa
 - Ready to deploy as Node.js application, standalone docker container or using docker-compose
 
 <p align="center">
-  <img src="./public/images/example.png" alt="metasquanch" width="738">
+  <img src="./public/images/example.png" alt="metasquanch">
 </p>
 
 ## Running metasquanch as Node.js application
