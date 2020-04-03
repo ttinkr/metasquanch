@@ -12,10 +12,8 @@ metasquanch is a server application that allows ingestion of files via web uploa
 
 <p align="center">
   <img src="./public/images/example.png" align="left" alt="metasquanch" width="40%">
-</p>
-
-
-
+</p>  
+  
 ## Running metasquanch as Node.js application
 
 ### Prerequisites
