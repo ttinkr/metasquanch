@@ -137,6 +137,5 @@ if (process.env.TLS_ENABLED === true) {
 } else {
   server.listen(process.env.PORT || process.argv[2] || 8000, () => {
     console.log("HTTP Server running on port " + (process.env.PORT || process.argv[2] || 8000));
-    console.log("If this is a production system you should consider enabling TLS");
   });
 }
