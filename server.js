@@ -104,9 +104,9 @@ let sessionOptions = {
   }
 };
 
-if (process.env.NODE_ENV === "production") {
+if (process.env.REDIS_URL) {
   let RedisStore = require("connect-redis")(session);
-  let redisClient = redis.createClient();
+  let redisClient = redis.createClient(process.env.REDIS_URL);
   sessionOptions.store = new RedisStore({
     client: redisClient,
     url: process.env.REDIS_URL
