@@ -20,6 +20,11 @@ const express = require("express"),
   router = require("./routes"),
   server = express();
 
+// create folders if they don't exist
+fs.ensureDir(path.join(process.env.UPLOAD_PATH));
+fs.ensureDir(path.join(process.env.DOWNLOAD_PATH));
+fs.ensureDir(path.join(process.env.LOG_PATH));
+
 // clean folders before starting
 fs.emptyDir(path.join(process.env.UPLOAD_PATH));
 fs.emptyDir(path.join(process.env.DOWNLOAD_PATH));
