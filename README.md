@@ -35,7 +35,7 @@ sudo dnf install qpdf exiftool
 Clone the repo, adjust the environment variables and start the application:
 
 ```
-https://github.com/ttinkr/metasquanch
+git clone https://github.com/ttinkr/metasquanch
 cd metasquanch
 cp .env-sample .env
 vim .env
@@ -49,7 +49,7 @@ If you plan to run metasquanch as a container you need a working container engin
 ### Deployment
 Clone the repo, adjust the environment variables, build the image and run the container:
 ```
-https://github.com/ttinkr/metasquanch
+git clone https://github.com/ttinkr/metasquanch
 cd metasquanch
 cp .env-sample .env
 vim .env
@@ -66,7 +66,7 @@ If you plan to run metasquanch as a container using docker-compose you need a wo
 ### Deployment
 Clone the repo, adjust the environment variables, configure ngingx and build the image and run the container:
 ```
-https://github.com/ttinkr/metasquanch
+git clone https://github.com/ttinkr/metasquanch
 cd metasquanch
 cp .env-sample .env
 vim .env
