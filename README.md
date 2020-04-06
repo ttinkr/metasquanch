@@ -1,4 +1,4 @@
-<p><img src="./public/images/squanchy.png" width="180x" /></p>
+<p align="right"><img src="./public/images/squanchy.png" width="180x" /></p>
 
 # metasquanch
 
