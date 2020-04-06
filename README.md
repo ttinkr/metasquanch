@@ -20,7 +20,7 @@ If you plan to run metasquanch without a container runtime, be sure to have a wo
 Furthermore install exiftool and qpdf. This can be achieved by running...
 
 ```
-sudo apt update && apt install exiftool qpdf
+sudo apt update && sudo apt install exiftool qpdf
 ```
 
 ...on a Debian based OS or by running...
