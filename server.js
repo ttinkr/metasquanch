@@ -56,7 +56,7 @@ server.engine(
 server.set("view engine", "html");
 
 server.use(express.static("public"));
-server.use(favicon(__dirname + '/public/images/squanchy.png'));
+server.use(favicon(__dirname + "/public/images/squanchy.png"));
 
 // set secure headers
 server.use((req, res, next) => {
@@ -99,10 +99,11 @@ let sessionOptions = {
   cookie: {
     path: "/",
     httpOnly: true,
-    secure: true,
     maxAge: null
   }
 };
+
+process.env.COOKIE_SECURE == "true" ? sessionOptions.cookie.secure = true : sessionOptions.cookie.secure = false;
 
 if (process.env.REDIS_URL) {
   let RedisStore = require("connect-redis")(session);
@@ -118,7 +119,7 @@ server.use(session(sessionOptions));
 server.use("/", router);
 
 // tls
-if (process.env.TLS_ENABLED === true) {
+if (process.env.TLS_ENABLED == "true") {
   const privateKey = fs.readFileSync(process.env.PRIVATE_KEY, "utf8"),
     certificate = fs.readFileSync(process.env.CERT, "utf8");
   ca = fs.readFileSync(process.env.CA, "utf8");

@@ -13,7 +13,7 @@ const cleanFiles = async (req, res) => {
         await fileService.copyToDownload(req.session.id);
     } else {
         await metadataService.execExiftoolRemove(req.session.id);
-        compressionService.compressFiles(uploadedFiles, req);
+        await compressionService.compressFiles(uploadedFiles, req);
         req.session.ultype = 'multi';
     }
     res.status(200).send();
