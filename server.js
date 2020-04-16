@@ -96,6 +96,8 @@ server.use(
   })
 );
 
+server.set('trust proxy', true);
+
 process.env.SESSION_SECRET == "" ? uuidv4() : process.env.SESSION_SECRET;
 
 let sessionOptions = {
@@ -112,7 +114,7 @@ let sessionOptions = {
   },
 };
 
-process.env.COOKIE_SECURE == "true" ? (sessionOptions.cookie.secure = true) : (sessionOptions.cookie.secure = false);
+process.env.TLS_ENABLED == "true" && process.env.COOKIE_SECURE == "true" ? sessionOptions.cookie.secure = true : sessionOptions.cookie.secure = false;
 
 if (process.env.REDIS_URL != "") {
   let RedisStore = require("connect-redis")(session);
@@ -124,7 +126,6 @@ if (process.env.REDIS_URL != "") {
 }
 
 server.use(session(sessionOptions));
-
 server.use("/", router);
 
 // tls
