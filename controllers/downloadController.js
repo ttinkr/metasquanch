@@ -11,7 +11,6 @@ const downloadFiles = async (req, res) => {
             res.download(zipFilename, async function () {
                 await emptyDir(uploadPath);
                 await fs.emptyDir(downloadPath);
-                req.session.regenerate(function (err) {});
             });
         } catch (err) {
             throw new Error(err);
@@ -22,7 +21,6 @@ const downloadFiles = async (req, res) => {
             res.download(singleFilename, async function () {
                 await fs.emptyDir(uploadPath);
                 await fs.emptyDir(downloadPath);
-                req.session.regenerate(function (err) {});
             });
         } catch (err) {
             throw new Error(err);

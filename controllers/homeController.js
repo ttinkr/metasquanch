@@ -1,8 +1,10 @@
 const renderHome = async (req, res) => {
-    res.render('index', {
-        title: 'metasquanch',
-        heading: 'metasquanch',
-        homeActive: true
+    req.session.regenerate(function (err) {
+        res.render('index', {
+            title: 'metasquanch',
+            heading: 'metasquanch',
+            homeActive: true
+        });
     });
 }
 
