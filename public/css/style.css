@@ -67,6 +67,12 @@ nav {
     display: block;
 }
 
+.refs {
+    float: right;
+    margin-right: 2em;
+    opacity: 0.6;
+}
+
 .form-label {
     display: inline-block;
     width: 13em;
