@@ -1,5 +1,12 @@
 require("dotenv").config();
 
+// ensure required env vars are set
+let requiredEnv = ["UPLOAD_PATH", "DOWNLOAD_PATH", "LOG_PATH", "MAX_FILES", "MAX_FILESIZE"];
+let unsetEnv = requiredEnv.filter((env) => !(typeof process.env[env] !== "undefined"));
+if (unsetEnv.length > 0) {
+  throw new Error("Required env variables are not set: [" + unsetEnv.join(", ") + "]");
+}
+
 const express = require("express"),
   favicon = require("express-favicon"),
   session = require("express-session"),
@@ -36,7 +43,7 @@ if (process.env.MAIL_ENABLED === true) {
 
 server.use(
   bodyParser.urlencoded({
-    extended: true
+    extended: true,
   })
 );
 
@@ -50,7 +57,7 @@ server.engine(
   expressHandlebars({
     extname: "html",
     partialsDir: "views/partials",
-    defaultLayout: null
+    defaultLayout: null,
   })
 );
 server.set("view engine", "html");
@@ -72,12 +79,12 @@ server.use(
         styleSrc: [(req, res) => `'nonce-${res.locals.nonce}'`],
         scriptSrc: [(req, res) => `'nonce-${res.locals.nonce}'`],
         objectSrc: [(req, res) => `'nonce-${res.locals.nonce}'`],
-        upgradeInsecureRequests: true
-      }
+        upgradeInsecureRequests: true,
+      },
     },
     referrerPolicy: {
-      policy: "same-origin"
-    }
+      policy: "same-origin",
+    },
   })
 );
 
@@ -85,9 +92,11 @@ server.use(
   expectCt({
     enforce: process.env.CT_ENFORCE,
     maxAge: 30,
-    reportUri: process.env.CT_REPORT_URI
+    reportUri: process.env.CT_REPORT_URI,
   })
 );
+
+process.env.SESSION_SECRET == "" ? uuidv4() : process.env.SESSION_SECRET;
 
 let sessionOptions = {
   genid: function (req) {
@@ -99,18 +108,18 @@ let sessionOptions = {
   cookie: {
     path: "/",
     httpOnly: true,
-    maxAge: null
-  }
+    maxAge: null,
+  },
 };
 
-process.env.COOKIE_SECURE == "true" ? sessionOptions.cookie.secure = true : sessionOptions.cookie.secure = false;
+process.env.COOKIE_SECURE == "true" ? (sessionOptions.cookie.secure = true) : (sessionOptions.cookie.secure = false);
 
-if (process.env.REDIS_URL) {
+if (process.env.REDIS_URL != "") {
   let RedisStore = require("connect-redis")(session);
   let redisClient = redis.createClient(process.env.REDIS_URL);
   sessionOptions.store = new RedisStore({
     client: redisClient,
-    url: process.env.REDIS_URL
+    url: process.env.REDIS_URL,
   });
 }
 
@@ -128,7 +137,7 @@ if (process.env.TLS_ENABLED == "true") {
     cert: certificate,
     ca: ca,
     secureOptions: constants.SSL_OP_NO_SSLv2 | constants.SSL_OP_NO_SSLv3 | constants.SSL_OP_NO_TLSv1 | constants.SSL_OP_NO_TLSv1_1,
-    honorCipherOrder: true
+    honorCipherOrder: true,
   }),
   (httpsServer = https.createServer(options, server));
 
