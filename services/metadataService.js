@@ -23,7 +23,7 @@ const execExiftoolShow = async sessionId => {
 const execExiftoolRemove = sessionId => {
     const absolutePath = path.join(__dirname, '../', process.env.UPLOAD_PATH, sessionId);
     return new Promise((resolve, reject) => {
-        execFile('exiftool', ['-all', `${absolutePath}`], (err, stdout, stderr) => {
+        execFile('exiftool', ['-all=', `${absolutePath}`], (err, stdout, stderr) => {
             if (err) {
                 console.warn(err);
                 reject(err);
