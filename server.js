@@ -1,18 +1,12 @@
 require("dotenv").config();
 
-// ensure required env vars are set
-let requiredEnv = ["UPLOAD_PATH", "DOWNLOAD_PATH", "LOG_PATH"];
-let unsetEnv = requiredEnv.filter((env) => !(typeof process.env[env] !== "undefined"));
-if (unsetEnv.length > 0) {
-  throw new Error("Required env variables are not set: [" + unsetEnv.join(", ") + "]");
-}
-
 const express = require("express"),
   favicon = require("express-favicon"),
   session = require("express-session"),
   MemoryStore = require("memorystore")(session),
   expressHandlebars = require("express-handlebars"),
   bodyParser = require("body-parser"),
+  os = require("os"),
   path = require("path"),
   fs = require("fs-extra"),
   pino = require("express-pino-logger")(),
@@ -24,6 +18,11 @@ const express = require("express"),
   mailService = require("./services/mailService"),
   sessionService = require("./services/sessionService");
 (router = require("./routes")), (server = express());
+
+// configure temporary folders
+process.env.UPLOAD_PATH == "" ? path.join(os.tmpdir(), "upload") : process.env.UPLOAD_PATH;
+process.env.DOWNLOAD_PATH == "" ? path.join(os.tmpdir(), "download") : process.env.DOWNLOAD_PATH;
+process.env.LOG_PATH == "" ? path.join(os.tmpdir(), "log") : process.env.LOG_PATH;
 
 // create folders if they don't exist
 fs.ensureDir(path.join(process.env.UPLOAD_PATH));
