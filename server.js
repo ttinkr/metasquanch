@@ -1,7 +1,7 @@
 require("dotenv").config();
 
 // ensure required env vars are set
-let requiredEnv = ["UPLOAD_PATH", "DOWNLOAD_PATH", "LOG_PATH", "MAX_FILES", "MAX_FILESIZE"];
+let requiredEnv = ["UPLOAD_PATH", "DOWNLOAD_PATH", "LOG_PATH"];
 let unsetEnv = requiredEnv.filter((env) => !(typeof process.env[env] !== "undefined"));
 if (unsetEnv.length > 0) {
   throw new Error("Required env variables are not set: [" + unsetEnv.join(", ") + "]");
@@ -10,12 +10,12 @@ if (unsetEnv.length > 0) {
 const express = require("express"),
   favicon = require("express-favicon"),
   session = require("express-session"),
+  MemoryStore = require('memorystore')(session),
   expressHandlebars = require("express-handlebars"),
   bodyParser = require("body-parser"),
   path = require("path"),
   fs = require("fs-extra"),
   pino = require("express-pino-logger")(),
-  redis = require("redis"),
   https = require("https"),
   constants = require("constants"),
   helmet = require("helmet"),
@@ -23,8 +23,9 @@ const express = require("express"),
   {
     v4: uuidv4
   } = require("uuid"),
-  mailService = require("./services/mailService.js"),
-  router = require("./routes"),
+  mailService = require("./services/mailService"),
+  sessionService = require("./services/sessionService");
+router = require("./routes"),
   server = express();
 
 // create folders if they don't exist
@@ -104,26 +105,24 @@ let sessionOptions = {
   genid: function (req) {
     return uuidv4();
   },
-  secret: process.env.SESSION_SECRET,
+  secret: process.env.SESSION_SECRET || uuidv4(),
+  store: new MemoryStore({
+    checkPeriod: 60000,
+    max: 10000,
+    ttl: 600000,
+    dispose: sessionService.sessionCleanup,
+    noDisposeOnSet: true
+  }),
   resave: false,
   saveUninitialized: true,
   cookie: {
     path: "/",
     httpOnly: true,
-    maxAge: null,
+    maxAge: 600000,
   },
 };
 
 process.env.TLS_ENABLED == "true" && process.env.COOKIE_SECURE == "true" ? sessionOptions.cookie.secure = true : sessionOptions.cookie.secure = false;
-
-if (process.env.REDIS_URL != "") {
-  let RedisStore = require("connect-redis")(session);
-  let redisClient = redis.createClient(process.env.REDIS_URL);
-  sessionOptions.store = new RedisStore({
-    client: redisClient,
-    url: process.env.REDIS_URL,
-  });
-}
 
 server.use(session(sessionOptions));
 server.use("/", router);

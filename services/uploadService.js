@@ -1,10 +1,11 @@
 const multer = require("multer"),
+  path = require('path'),
   sanitize = require("sanitize-filename"),
   mkdirp = require("mkdirp");
 
 const storage = multer.diskStorage({
   destination: (req, file, cb) => {
-    let uploadPath = process.env.UPLOAD_PATH + "/" + req.session.id;
+    let uploadPath = path.join(process.env.UPLOAD_PATH + "/" + req.session.id);
     mkdirp.sync(uploadPath);
     cb(null, uploadPath);
   },
@@ -16,8 +17,8 @@ const storage = multer.diskStorage({
 const upload = multer({
   storage: storage,
   limits: {
-    files: process.env.MAX_FILES,
-    fileSize: process.env.MAX_FILESIZE * 1024 * 1024,
+    files: process.env.MAX_FILES || 20,
+    fileSize: process.env.MAX_FILESIZE * 1024 * 1024 || 20971520,
   },
   fileFilter: (req, file, cb) => {
     // allow only certain filetypes

@@ -7,7 +7,7 @@ const
   logsController = require('../controllers/logsController');
 
 router.get('/', homeController.renderHome);
-router.post('/clean', uploadService.upload.any('files', process.env.MAX_FILES), cleanController.cleanFiles);
+router.post('/clean', uploadService.upload.any('files', process.env.MAX_FILES || 20), cleanController.cleanFiles);
 router.get('/download', downloadController.downloadFiles);
 router.get('/logs', logsController.getLogs);
 
