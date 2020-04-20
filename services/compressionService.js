@@ -16,7 +16,6 @@ const compressFiles = async (files, req) => {
                 }
                 // Add old, but not downloaded files to .zip
                 oldFiles.forEach(file => {
-                    console.log(file);
                     if (!file.endsWith('_original')) {
                         let absolutePath = path.join(__dirname, "../", process.env.UPLOAD_PATH, req.session.id, file);
                         zip.addLocalFile(absolutePath);
