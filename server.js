@@ -20,19 +20,19 @@ const express = require("express"),
 (router = require("./routes")), (server = express());
 
 // configure temporary folders
-process.env.UPLOAD_PATH == "" ? path.join(os.tmpdir(), "upload") : process.env.UPLOAD_PATH;
-process.env.DOWNLOAD_PATH == "" ? path.join(os.tmpdir(), "download") : process.env.DOWNLOAD_PATH;
-process.env.LOG_PATH == "" ? path.join(os.tmpdir(), "log") : process.env.LOG_PATH;
+process.env.UPLOAD_PATH = process.env.UPLOAD_PATH || path.join(os.tmpdir(), "upload");
+process.env.DOWNLOAD_PATH = process.env.DOWNLOAD_PATH || path.join(os.tmpdir(), "download");
+process.env.LOG_PATH = process.env.LOG_PATH || path.join(os.tmpdir(), "log");
 
-// create folders if they don't exist
-fs.ensureDir(path.join(process.env.UPLOAD_PATH));
-fs.ensureDir(path.join(process.env.DOWNLOAD_PATH));
-fs.ensureDir(path.join(process.env.LOG_PATH));
+// // create folders if they don't exist
+// fs.ensureDir(path.join(process.env.UPLOAD_PATH));
+// fs.ensureDir(path.join(process.env.DOWNLOAD_PATH));
+// fs.ensureDir(path.join(process.env.LOG_PATH));
 
-// clean folders before starting
-fs.emptyDir(path.join(process.env.UPLOAD_PATH));
-fs.emptyDir(path.join(process.env.DOWNLOAD_PATH));
-fs.emptyDir(path.join(process.env.LOG_PATH));
+// // clean folders before starting
+// fs.emptyDir(path.join(process.env.UPLOAD_PATH));
+// fs.emptyDir(path.join(process.env.DOWNLOAD_PATH));
+// fs.emptyDir(path.join(process.env.LOG_PATH));
 
 if (process.env.MAIL_ENABLED === true) {
   mailService.openMailbox();
