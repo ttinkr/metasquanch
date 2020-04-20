@@ -4,7 +4,6 @@ const metadataService = require('../services/metadataService'),
     compressionService = require('../services/compressionService');
 
 const cleanFiles = async (req, res) => {
-    await metadataService.execExiftoolShow(req.session.id);
     const uploadedFiles = await uploadService.getUploadedFiles(req, res);
     if (uploadedFiles.length == 1 && req.session.filename == undefined) {
         req.session.filename = uploadedFiles[0].name;
@@ -16,6 +15,7 @@ const cleanFiles = async (req, res) => {
         await compressionService.compressFiles(uploadedFiles, req);
         req.session.ultype = 'multi';
     }
+    await metadataService.execExiftoolShow(req.session.id);
     res.status(200).send();
 }
 

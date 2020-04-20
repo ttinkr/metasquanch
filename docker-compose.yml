@@ -6,7 +6,6 @@ services:
       network: host
     ports:
       - "8000:8000"
-    depends_on: redis
   nginx:
     image: "nginx:latest"
     volumes:
@@ -15,5 +14,3 @@ services:
     ports:
       - 80:80
       - 443:443
-  redis:
-    image: "redis:latest"
