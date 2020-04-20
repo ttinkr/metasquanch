@@ -5,7 +5,7 @@ const multer = require("multer"),
 
 const storage = multer.diskStorage({
   destination: (req, file, cb) => {
-    let uploadPath = path.join(process.env.UPLOAD_PATH + "/" + req.session.id);
+    let uploadPath = path.join(process.env.UPLOAD_PATH, req.session.id);
     mkdirp.sync(uploadPath);
     cb(null, uploadPath);
   },

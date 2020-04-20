@@ -3,7 +3,7 @@ const
     path = require('path');
 
 const enableLogs = async sessionId => {
-    const logFile = path.join(__dirname, '../', process.env.LOG_PATH, sessionId, sessionId + '.log');
+    const logFile = path.join(process.env.LOG_PATH, sessionId, sessionId + '.log');
     const logPath = path.dirname(logFile);
     try {
         await fs.mkdirp(logPath);
@@ -26,7 +26,7 @@ const redactLogs = async log => {
 }
 
 const getLogs = async sessionId => {
-    const logFile = path.join(__dirname, '../', process.env.LOG_PATH, sessionId, sessionId + '.log');
+    const logFile = path.join(process.env.LOG_PATH, sessionId, sessionId + '.log');
     try {
         const log = await fs.readFile(logFile, 'utf-8');
         const cleanLogs = await redactLogs(log);

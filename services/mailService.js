@@ -85,14 +85,14 @@ const cleanMessages = async messages => {
                 files = [],
                 unsupported = [];
             const sessionId = uuidv4();
-            await fs.mkdirp(path.join(__dirname, "../", process.env.UPLOAD_PATH, sessionId));
+            await fs.mkdirp(path.join(process.env.UPLOAD_PATH, sessionId));
             // download and save attachments of allowed file types
             for (let j = 0; j < message.bodyStructure.childNodes.length; j++) {
                 let node = message.bodyStructure.childNodes[j];
                 if (await checkMimeType(node.type)) {
                     let attachment = await imapClient.download(message.seq, node.part);
                     let filename = sanitize(attachment.meta.filename);
-                    let stream = await fs.createWriteStream(path.join(__dirname, "../", process.env.UPLOAD_PATH, sessionId, filename));
+                    let stream = await fs.createWriteStream(path.join(process.env.UPLOAD_PATH, sessionId, filename));
                     await new Promise(resolve => {
                         attachment.content.pipe(stream);
                         stream.once('finish', () => {
@@ -175,7 +175,7 @@ const sendMail = async (receiver, subject, sessionId, files) => {
     // add attachments
     for (let i = 0; i < files.length; i++) {
         message.attachments.push({
-            path: path.join(__dirname, "../", process.env.UPLOAD_PATH, sessionId, files[i])
+            path: path.join(process.env.UPLOAD_PATH, sessionId, files[i])
         });
     }
     // send message

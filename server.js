@@ -14,25 +14,33 @@ const express = require("express"),
   constants = require("constants"),
   helmet = require("helmet"),
   expectCt = require("expect-ct"),
-  { v4: uuidv4 } = require("uuid"),
+  {
+    v4: uuidv4
+  } = require("uuid"),
   mailService = require("./services/mailService"),
   sessionService = require("./services/sessionService");
 (router = require("./routes")), (server = express());
 
 // configure temporary folders
-process.env.UPLOAD_PATH = process.env.UPLOAD_PATH || path.join(os.tmpdir(), "upload");
-process.env.DOWNLOAD_PATH = process.env.DOWNLOAD_PATH || path.join(os.tmpdir(), "download");
-process.env.LOG_PATH = process.env.LOG_PATH || path.join(os.tmpdir(), "log");
+process.env.UPLOAD_PATH = process.env.UPLOAD_PATH ?
+  path.join(__dirname, process.env.UPLOAD_PATH) :
+  path.join(os.tmpdir(), "upload");
+process.env.DOWNLOAD_PATH = process.env.DOWNLOAD_PATH ?
+  path.join(__dirname, process.env.DOWNLOAD_PATH) :
+  path.join(os.tmpdir(), "download");
+process.env.LOG_PATH = process.env.LOG_PATH ?
+  path.join(__dirname, process.env.LOG_PATH) :
+  path.join(os.tmpdir(), "log");
 
-// // create folders if they don't exist
-// fs.ensureDir(path.join(process.env.UPLOAD_PATH));
-// fs.ensureDir(path.join(process.env.DOWNLOAD_PATH));
-// fs.ensureDir(path.join(process.env.LOG_PATH));
+// create folders if they don't exist
+fs.ensureDir(process.env.UPLOAD_PATH);
+fs.ensureDir(process.env.DOWNLOAD_PATH);
+fs.ensureDir(process.env.LOG_PATH);
 
-// // clean folders before starting
-// fs.emptyDir(path.join(process.env.UPLOAD_PATH));
-// fs.emptyDir(path.join(process.env.DOWNLOAD_PATH));
-// fs.emptyDir(path.join(process.env.LOG_PATH));
+// clean folders before starting
+fs.emptyDir(path.join(process.env.UPLOAD_PATH));
+fs.emptyDir(path.join(process.env.DOWNLOAD_PATH));
+fs.emptyDir(path.join(process.env.LOG_PATH));
 
 if (process.env.MAIL_ENABLED === true) {
   mailService.openMailbox();
@@ -118,9 +126,9 @@ let sessionOptions = {
   },
 };
 
-process.env.TLS_ENABLED == "true" && process.env.COOKIE_SECURE == "true"
-  ? (sessionOptions.cookie.secure = true)
-  : (sessionOptions.cookie.secure = false);
+process.env.TLS_ENABLED == "true" && process.env.COOKIE_SECURE == "true" ?
+  (sessionOptions.cookie.secure = true) :
+  (sessionOptions.cookie.secure = false);
 
 server.use(session(sessionOptions));
 server.use("/", router);
@@ -134,11 +142,10 @@ if (process.env.TLS_ENABLED == "true") {
     key: privateKey,
     cert: certificate,
     ca: ca,
-    secureOptions:
-      constants.SSL_OP_NO_SSLv2 | constants.SSL_OP_NO_SSLv3 | constants.SSL_OP_NO_TLSv1 | constants.SSL_OP_NO_TLSv1_1,
+    secureOptions: constants.SSL_OP_NO_SSLv2 | constants.SSL_OP_NO_SSLv3 | constants.SSL_OP_NO_TLSv1 | constants.SSL_OP_NO_TLSv1_1,
     honorCipherOrder: true,
   }),
-    (httpsServer = https.createServer(options, server));
+  (httpsServer = https.createServer(options, server));
 
   httpsServer.listen(process.env.PORT || process.argv[2] || 8000, () => {
     console.log("HTTPS Server running on port " + (process.env.PORT || process.argv[2] || 8000));

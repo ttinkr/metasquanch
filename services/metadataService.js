@@ -7,7 +7,7 @@ const
 
 const execExiftoolShow = async sessionId => {
     await logsService.enableLogs(sessionId);
-    const absolutePath = path.join(__dirname, '../', process.env.UPLOAD_PATH, sessionId);
+    const absolutePath = path.join(process.env.UPLOAD_PATH, sessionId);
     return new Promise((resolve, reject) => {
         execFile('exiftool', ['-j', '-G', `${absolutePath}`], (err, stdout, stderr) => {
             if (err) {
@@ -21,7 +21,7 @@ const execExiftoolShow = async sessionId => {
 }
 
 const execExiftoolRemove = sessionId => {
-    const absolutePath = path.join(__dirname, '../', process.env.UPLOAD_PATH, sessionId);
+    const absolutePath = path.join(process.env.UPLOAD_PATH, sessionId);
     return new Promise((resolve, reject) => {
         execFile('exiftool', ['-all=', `${absolutePath}`], (err, stdout, stderr) => {
             if (err) {
