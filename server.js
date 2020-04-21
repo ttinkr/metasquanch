@@ -18,8 +18,9 @@ const express = require("express"),
     v4: uuidv4
   } = require("uuid"),
   mailService = require("./services/mailService"),
-  sessionService = require("./services/sessionService");
-(router = require("./routes")), (server = express());
+  sessionService = require("./services/sessionService"),
+  router = require("./routes"),
+  server = express();
 
 // configure temporary folders
 process.env.UPLOAD_PATH = process.env.UPLOAD_PATH ?
