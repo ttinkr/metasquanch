@@ -2,6 +2,8 @@
 
 # ｍ е ｔａ ѕ ｑｕ а ｎ сһ
 
+<img src="https://img.shields.io/badge/license-GPLv3-brightgreen">
+
 metasquanch is a server application that allows ingestion of files via web upload or email to remove metadata, javascript and other unwanted parts.
 
 - Simple web interface to upload and clean files
