@@ -21,7 +21,6 @@ Dropzone.options.uploadWidget = {
   maxFileSize: 20,
   maxFiles: 20,
   dictDefaultMessage: 'Drag a file here to squanch or click to squanch one',
-  acceptedFiles: 'image/*, application/pdf, application/msword, application/vnd.openxmlformats-*, application/vnd.ms-*',
   createImageThumbnails: false,
   uploadMultiple: true,
   parallelUploads: 2000,
