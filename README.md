@@ -50,7 +50,7 @@ npm start
 
 ### Prerequisites
 
-If you plan to run metasquanch as a container you need a working container engine like docker.
+If you plan to run metasquanch as a container you need a working container runtime like docker.
 
 ### Deployment
 
