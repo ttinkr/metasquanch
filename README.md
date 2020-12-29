@@ -8,7 +8,7 @@ metasquanch is a server application that allows ingestion of files via web uploa
 
 - Simple web interface to upload and clean files
 - Ability to monitor a mailbox, clean attachments and respond to sender
-- Usage of of exiftool and qpdf in the background
+- Usage of exiftool and qpdf in the background
 - Ready to deploy as Node.js application, standalone docker container or using docker-compose
 - Use of promises and async/await
 - Focus on security (TLS, CSP, HSTS,...)
