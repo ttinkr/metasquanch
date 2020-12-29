@@ -20,7 +20,7 @@ metasquanch is a server application that allows ingestion of files via web uploa
 ### Prerequisites
 
 If you plan to run metasquanch without a container runtime, be sure to have a working Node.js environment.
-Furthermore install exiftool and qpdf. This can be achieved by running...
+Furthermore install exiftool and qpdf (qpdf version has to be at least 9.0.0). This can be achieved by running...
 
 ```
 sudo apt update && sudo apt install exiftool qpdf
